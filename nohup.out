@@ -1,0 +1,21 @@
+Watching for file changes with StatReloader
+[12/Jun/2022 22:56:21] "POST /kakaochat/ HTTP/1.1" 200 76
+[12/Jun/2022 22:56:22] "POST /kakaochat/ HTTP/1.1" 200 76
+[12/Jun/2022 22:56:25] "POST /kakaochat/ HTTP/1.1" 200 76
+[12/Jun/2022 22:56:29] "POST /kakaochat/ HTTP/1.1" 200 76
+[12/Jun/2022 22:56:30] "POST /kakaochat/ HTTP/1.1" 200 76
+[12/Jun/2022 22:56:41] "POST /kakaochat/ HTTP/1.1" 200 76
+Not Found: /
+[12/Jun/2022 22:56:51] "GET / HTTP/1.1" 404 2042
+Not Found: /favicon.ico
+[12/Jun/2022 22:56:51] "GET /favicon.ico HTTP/1.1" 404 2093
+[12/Jun/2022 22:56:55] "GET /kakaochat/ HTTP/1.1" 200 76
+[12/Jun/2022 22:57:02] "GET /kakaochat/ HTTP/1.1" 200 76
+[12/Jun/2022 22:57:07] "GET /kakaochat/ HTTP/1.1" 200 76
+[12/Jun/2022 22:57:15] "POST /kakaochat/ HTTP/1.1" 200 76
+[12/Jun/2022 22:57:16] "POST /kakaochat/ HTTP/1.1" 200 76
+[12/Jun/2022 22:57:17] "POST /kakaochat/ HTTP/1.1" 200 76
+[12/Jun/2022 22:57:18] "POST /kakaochat/ HTTP/1.1" 200 76
+[12/Jun/2022 22:57:28] "GET /kakaochat/ HTTP/1.1" 200 76
+[12/Jun/2022 22:57:30] "GET /kakaochat/ HTTP/1.1" 200 76
+[12/Jun/2022 22:57:32] "GET /kakaochat/ HTTP/1.1" 200 76

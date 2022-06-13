@@ -1,3 +1,6 @@
+# outsidePE
+
+<<<<<<< HEAD
 ```
 ┌───────────────────────────────────────────────┐
                                        _       
@@ -45,3 +48,6 @@ goormIDE is a powerful cloud IDE service to maximize productivity for developers
 
 Visit [https://ide.goorm.io](https://ide.goorm.io) to support and learn more about using goormIDE.  
 To watch some usage guides, visit [https://help.goorm.io/en/goormide](https://help.goorm.io/en/goormide)
+=======
+# outsidePE
+>>>>>>> c1d53df3742ba22b9d4bb33eb9d1588e18173c16
