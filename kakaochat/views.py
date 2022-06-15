@@ -37,10 +37,10 @@ def weather(request):
     base_date = today.strftime("%Y%m%d")
     base_time = "0800"
 
-    nx = "60"
-    ny = "128"
+    nx = "61"
+    ny = "126"
     
-    payload = "service_key=" + service_key + "&" +\
+    payload = "serviceKey=" + service_key + "&" +\
                 "dataType=json" + "&" +\
                 "base_date=" + base_date + "&" +\
                 "base_time=" + base_time + "&" +\
@@ -50,5 +50,5 @@ def weather(request):
     res = requests.get(weather_url + payload)
     
     print(res)
-    return JsonResponse(res.get('body'))
+    return JsonResponse(res.json())
     #items = res.json().get('reponse').get('body').get('items')
