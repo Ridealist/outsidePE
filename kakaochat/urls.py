@@ -3,5 +3,6 @@ from . import views
 
 app_name = 'kakaochat'
 urlpatterns = [
-    path('', views.random_function, name='random'),
+    path('random/', views.random_function, name='random'),
+    path('weather/', views.weather, name='weather')
 ]
