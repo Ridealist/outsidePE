@@ -1,3 +1,5 @@
+import logging
+
 from django.http import JsonResponse
 
 from rest_framework.decorators import api_view
@@ -12,7 +14,11 @@ from datetime import date, datetime, timedelta # 현재 날짜 외의 날짜 구
 
 import random
 
-@api_view(["GET"])
+
+logger = logging.getLogger(__name__)
+
+
+@api_view(["GET", "POST"])
 def random_function(request):
     res = {
         "version": "2.0",
@@ -29,24 +35,34 @@ def random_function(request):
     return JsonResponse(res)
 
 
-@api_view(["GET", "POST"])
-def weekday():
+@api_view(["POST"])
+def weekday(request):
     week_list = ["월", "화", "수", "목", "금", "토", "일"]
     # 카카오 서버에서 스킬이 보내는 요청 데이터
-    request_data = json.loads(requests.get_data(), encoding="utf-8")
+    req = ((request.body).decode('utf-8'))
+    request_data = json.loads(req)
     print(request_data)
 
     # get date parmas
     # 파라미터에서 날짜 파라미터의 값 가져오기(문자열로 되어 있으므로 별도로 json 변환 필요)
-    params = request_data['action']['params'] # 파라미터 가져오기
-    param_date = json.loads(params['sys_date_params']) # 파라미터 중 날짜 파라미터 가져오기
-    print(param_date)
+    date = request_data['action']['params']['date'] # 파라미터 가져오기
+    param_date = json.loads(params['sys_date_params'])
 
+    try:
+        idx_y = date.find("년")
+        param_year = date[:idx_y]
+    except:
+        param_year = datetime.today().year
+    idx_m = date.find("월")
+    param_month = date[(idx_m - 2):idx_m].strip()
+    idx_d = date.find("일")
+    param_day = date[(idx_d - 2):idx_d].strip()
+    
     # 해당 날짜를 (파이썬 날짜/시간 저장형식) datetime 형식으로 저장하기(년도 정보가 없는 겅우 현재 년도 지정)
-    date_obj = datetime.datetime(
-        int(param_date['year']) if param_date['year'] else datetime.datetime.today().year,
-        int(param_date['month']),
-        int(param_date['day'])
+    date_obj = date(
+        int(param_year),
+        int(param_month),
+        int(param_day)
     )
     
     res = {
