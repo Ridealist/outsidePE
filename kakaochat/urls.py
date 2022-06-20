@@ -5,6 +5,7 @@ app_name = 'kakaochat'
 urlpatterns = [
     path('random/', views.random_function, name='random'),
     path('weekday/', views.weekday, name='weekday'),
-    path('shrtncst/', views.ShrtNcst, name='shrtncst'),
+    path('srtncst/', views.UltraSrtNcst, name='ultrasrtncst'),
+    path('srtfcst/', views.UltraSrtFcst, name='ultrasrtfcst'),
     path('vilagefcst/', views.VilageFcst, name='vilagefcst')
 ]
