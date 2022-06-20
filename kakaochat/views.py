@@ -8,7 +8,6 @@ from rest_framework.response import Response
 import requests # HTTP 요청을 보내는 모듈
 import json # json 파일 파싱하여 데이터 읽는 모듈
 import datetime # 날짜시간 모듈
-import pprint
 
 from datetime import date, datetime, timedelta # 현재 날짜 외의 날짜 구하기 위한 모듈
 
@@ -89,13 +88,13 @@ def VilageFcst(request):
     
     service_key = "1gBJqXUPjw9pRznJDfyVledJCQop%2B%2BUzpFZhWjhGrMZKjQ305PGGxoTr%2BGSNYpMExVLCQRIsBtI2ccZmKoxK%2Bg%3D%3D"
     
-    yesterday = date.today() - timedelta(days=1)
-    base_date = yesterday.strftime("%Y%m%d")
+    today = date.today()
+    base_date = today.strftime("%Y%m%d")
     base_time = "0800"
 
     nx = "61"
     ny = "126"
-    
+
     payload = "serviceKey=" + service_key + "&" +\
                 "dataType=json" + "&" +\
                 "base_date=" + base_date + "&" +\
@@ -116,10 +115,10 @@ def ShrtNcst(request):
     weather_url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst?"
     
     service_key = "1gBJqXUPjw9pRznJDfyVledJCQop%2B%2BUzpFZhWjhGrMZKjQ305PGGxoTr%2BGSNYpMExVLCQRIsBtI2ccZmKoxK%2Bg%3D%3D"
-    
+
     today = date.today()
     base_date = today.strftime("%Y%m%d")
-    
+
     base_time = "0800"
 
     nx = "61"
