@@ -96,7 +96,7 @@ def UltraSrtNcst(request):
     # datetime.now().minute
 
     end_results = {}
-    for i in range(hour + 1):
+    for i in range(hour):
         if i < 10:
             base_time = "0" + str(i) + "00"
         else:
@@ -130,7 +130,7 @@ def UltraSrtNcst(request):
         result = {}
         for item_dict in items:
             if item_dict.get('category') == "T1H":
-                result["temparature"] = item_dict.get('obsrValue') + "°C"
+                result["temperature"] = item_dict.get('obsrValue') + "°C"
             if item_dict.get('category') == "R1N":
                 result["precipitation"] = item_dict.get('obsrValue') +"mm"
             if item_dict.get('category') == "REH":
@@ -149,7 +149,7 @@ def UltraSrtNcst(request):
             "outputs": [
                 {
                     "simpleText": {
-                        "text": end_results
+                        "text": "weather for now: " + end_results["0000"]["temperature"]
                     }
                 }
             ]
