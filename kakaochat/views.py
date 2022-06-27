@@ -17,7 +17,7 @@ import random
 logger = logging.getLogger(__name__)
 
 
-@api_view(["GET", "POST"])
+@api_view(["POST"])
 def random_function(request):
     res = {
         "version": "2.0",
@@ -81,7 +81,7 @@ def weekday(request):
     return JsonResponse(res)
 
 
-@api_view(["GET"])
+@api_view(["POST"])
 def UltraSrtNcst(request):
     
     weather_url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst?"
@@ -160,7 +160,7 @@ def UltraSrtNcst(request):
 
 
 
-@api_view(["GET"])
+@api_view(["POST"])
 def UltraSrtFcst(request):
 
     weather_url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst?"
@@ -262,7 +262,7 @@ def UltraSrtFcst(request):
 
 
 
-@api_view(["GET"])
+@api_view(["POST"])
 def VilageFcst(request):
     
     weather_url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?"
