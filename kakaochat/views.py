@@ -116,8 +116,6 @@ def UltraSrtNcst(request):
                 "ny=" + ny
 
     res = requests.get(weather_url + payload)
-
-
     res_data = res.json()
     items = res_data.get('response').get('body').get('items').get('item')
 
@@ -191,31 +189,30 @@ def UltraSrtNcst(request):
     return Response(end_results)
 
 
-
-    message = "기준 시각: " + results["basetime"] + "\n" + "현재 기온: " + results["temperature"] + "\n" +\
-              "현재 날씨: " + results["rain_type"] + "\n" + "현재 강수량: " + results["precipitation"] + "\n" +\
-              "현재 습도: " + results["humidity"]
+    # message = "기준 시각: " + results["basetime"] + "\n" + "현재 기온: " + results["temperature"] + "\n" +\
+    #           "현재 날씨: " + results["rain_type"] + "\n" + "현재 강수량: " + results["precipitation"] + "\n" +\
+    #           "현재 습도: " + results["humidity"]
     
-    # re = []
-    # re.append("현재 기온: {0} " + end_results["0000"]["temperature"])
-    # re.append("현재 날씨: {1} " + end_results["0000"]["rain_type"])
-    # re[2] = "현재 강수량: " + end_results["0000"]["precipitation"]
-    # re[3] = "현재 습도: " + end_results["0000"]["humidity"]
-    # re.join("/n")
+    # # re = []
+    # # re.append("현재 기온: {0} " + end_results["0000"]["temperature"])
+    # # re.append("현재 날씨: {1} " + end_results["0000"]["rain_type"])
+    # # re[2] = "현재 강수량: " + end_results["0000"]["precipitation"]
+    # # re[3] = "현재 습도: " + end_results["0000"]["humidity"]
+    # # re.join("/n")
                 
     
-    res = {
-        "version": "2.0",
-        "template": {
-            "outputs": [
-                {
-                    "simpleText": {
-                        "text": message
-                    }
-                }
-            ]
-        }
-    }
+    # res = {
+    #     "version": "2.0",
+    #     "template": {
+    #         "outputs": [
+    #             {
+    #                 "simpleText": {
+    #                     "text": message
+    #                 }
+    #             }
+    #         ]
+    #     }
+    # }
 
 
 @api_view(["GET"])
@@ -336,11 +333,8 @@ def VilageFcst(request):
                 "numOfRows=809"
                 
     res = requests.get(weather_url + payload)    
-    print(res)
-    return Response(res.json())
-    #items = res.json().get('reponse').get('body').get('items')
-
-	items_dict_list = res.json().get('response').get('body').get('items').get('item')
+    # return Response(res.json())
+    items_dict_list = res.json().get('response').get('body').get('items').get('item')
 
     pty_dict = {
         "0": "없음",
@@ -404,37 +398,31 @@ def template(request):
           {
             "listCard": {
               "header": {
-                "title": "챗봇 관리자센터를 소개합니다."
+                "title": "오늘의 기상현황을 알립니다."
               },
               "items": [
                 {
-                  "title": "챗봇 관리자센터",
-                  "description": "새로운 AI의 내일과 일상의 변화",
+                  "title": "오늘의 날씨",
+                  "description": "행당2동의 날씨 현황",
                   "imageUrl": "http://k.kakaocdn.net/dn/APR96/btqqH7zLanY/kD5mIPX7TdD2NAxgP29cC0/1x1.jpg",
                   "link": {
-                    "web": "https://namu.wiki/w/%EB%9D%BC%EC%9D%B4%EC%96%B8(%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%94%84%EB%A0%8C%EC%A6%88)"
+                    "web": "https://m.search.daum.net/kakao?w=tot&DA=SH1&rtmaxcoll=Z8T&dc=Z8T&q=%EC%84%B1%EB%8F%99%EA%B5%AC%20%ED%96%89%EB%8B%B92%EB%8F%99%20%EB%82%A0%EC%94%A8"
                   }
                 },
                 {
-                  "title": "챗봇 관리자센터",
-                  "description": "카카오톡 채널 챗봇 만들기",
+                  "title": "오늘의 대기오염",
+                  "description": "행당2동의 미세먼지 현황",
                   "imageUrl": "http://k.kakaocdn.net/dn/N4Epz/btqqHCfF5II/a3kMRckYml1NLPEo7nqTmK/1x1.jpg",
-                  "action": "block",
-                  "blockId": "62654c249ac8ed78441532de",
-                  "extra": {
-                    "key1": "value1",
-                    "key2": "value2"
+                  "link": {
+                    "web": "https://m.search.daum.net/kakao?w=tot&DA=SH1&rtmaxcoll=ATM&dc=ATM&q=%EC%84%9C%EC%9A%B8%20%EC%84%B1%EB%8F%99%EA%B5%AC%20%ED%96%89%EB%8B%B92%EB%8F%99%20%EB%AF%B8%EC%84%B8%EB%A8%BC%EC%A7%80"
                   }
                 },
                 {
-                  "title": "Kakao i Voice Service",
-                  "description": "보이스봇 / KVS 제휴 신청하기",
+                  "title": "오늘의 기상특보",
+                  "description": "전국 기상특보 현황",
                   "imageUrl": "http://k.kakaocdn.net/dn/bE8AKO/btqqFHI6vDQ/mWZGNbLIOlTv3oVF1gzXKK/1x1.jpg",
-                  "action": "message",
-                  "messageText": "Kakao i Voice Service",
-                  "extra": {
-                    "key1": "value1",
-                    "key2": "value2"
+                  "link": {
+                    "web": "https://m.search.daum.net/kakao?w=tot&DA=SH1&rtmaxcoll=WES&q=%EC%A0%84%EA%B5%AD%20%EA%B8%B0%EC%83%81%ED%8A%B9%EB%B3%B4"
                   }
                 }
               ],
