@@ -7,5 +7,6 @@ urlpatterns = [
     path('weekday/', views.weekday, name='weekday'),
     path('srtncst/', views.UltraSrtNcst, name='ultrasrtncst'),
     path('srtfcst/', views.UltraSrtFcst, name='ultrasrtfcst'),
-    path('vilagefcst/', views.VilageFcst, name='vilagefcst')
+    path('vilagefcst/', views.VilageFcst, name='vilagefcst'),
+    path('example/', views.template, name='template')
 ]
