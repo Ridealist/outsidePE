@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 
-app_name = "kakaochat"
+app_name = "weather"
 urlpatterns = [
     path("random/", views.random_function, name="random"),
     path("weekday/", views.weekday, name="weekday"),
