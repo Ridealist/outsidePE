@@ -86,7 +86,7 @@ def UltraSrtNcst(request):
     
     weather_url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst?"
     
-    service_key = "1gBJqXUPjw9pRznJDfyVledJCQop%2B%2BUzpFZhWjhGrMZKjQ305PGGxoTr%2BGSNYpMExVLCQRIsBtI2ccZmKoxK%2Bg%3D%3D"
+    service_key = "g5Zc7ZwONtAhYmlXEjbbN5OnPGAHEx8u9vPSfJpV%2B7XGBUR81SrcuRXpegLTnbwzW4nKMRyR0cL%2BXMqMMd%2BTww%3D%3D"
 
     today = date.today()
     base_date = today.strftime("%Y%m%d")
@@ -143,50 +143,7 @@ def UltraSrtNcst(request):
             obsr_value = item_dict.get('obsrValue')
             results["rain_type"] = pty_dict.get(obsr_value)
 
-    end_results = {}
-    for i in range(h):
-        if i < 10:
-            base_time = "0" + str(i) + "00"
-        else:
-            base_time = str(i) + "00"
-
-        nx = "61"
-        ny = "126"
-        
-        payload = "serviceKey=" + service_key + "&" +\
-                    "dataType=json" + "&" +\
-                    "base_date=" + base_date + "&" +\
-                    "base_time=" + base_time + "&" +\
-                    "nx=" + nx + "&" +\
-                    "ny=" + ny
-                    
-        res = requests.get(weather_url + payload)
-        items = res.json().get('response').get('body').get('items').get('item')
-
-
-        pty_dict = {
-            "0": "없음",
-            "1": "비",
-            "2": "비/눈",
-            "3": "눈",
-            "5": "빗방울",
-            "6": "빗방울눈날림",
-            "7": "눈날림",
-        }
-
-        result = {}
-        for item_dict in items:
-            if item_dict.get('category') == "T1H":
-                result["temperature"] = item_dict.get('obsrValue') + "°C"
-            if item_dict.get('category') == "RN1":
-                result["precipitation"] = item_dict.get('obsrValue') +"mm"
-            if item_dict.get('category') == "REH":
-                result["humidity"] = item_dict.get('obsrValue') + "%"
-            if item_dict.get('category') == "PTY":
-                obsr_value = item_dict.get('obsrValue')
-                result["rain_type"] = pty_dict.get(obsr_value)
-
-    return Response(end_results)
+    return Response(results)
 
 
     # message = "기준 시각: " + results["basetime"] + "\n" + "현재 기온: " + results["temperature"] + "\n" +\
@@ -220,7 +177,7 @@ def UltraSrtFcst(request):
 
     weather_url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst?"
     
-    service_key = "1gBJqXUPjw9pRznJDfyVledJCQop%2B%2BUzpFZhWjhGrMZKjQ305PGGxoTr%2BGSNYpMExVLCQRIsBtI2ccZmKoxK%2Bg%3D%3D"
+    service_key = "g5Zc7ZwONtAhYmlXEjbbN5OnPGAHEx8u9vPSfJpV%2B7XGBUR81SrcuRXpegLTnbwzW4nKMRyR0cL%2BXMqMMd%2BTww%3D%3D"
 
     today = date.today()
     # yesterday = datetime.today() - timedelta(days=1)
@@ -253,8 +210,6 @@ def UltraSrtFcst(request):
                 "numOfRows=60"
 
     res = requests.get(weather_url + payload)
-    # return Response(res.json())
-
     items_dict_list = res.json().get('response').get('body').get('items').get('item')
 
     # time_list = []
@@ -314,7 +269,7 @@ def VilageFcst(request):
     
     weather_url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?"
     
-    service_key = "1gBJqXUPjw9pRznJDfyVledJCQop%2B%2BUzpFZhWjhGrMZKjQ305PGGxoTr%2BGSNYpMExVLCQRIsBtI2ccZmKoxK%2Bg%3D%3D"
+    service_key = "g5Zc7ZwONtAhYmlXEjbbN5OnPGAHEx8u9vPSfJpV%2B7XGBUR81SrcuRXpegLTnbwzW4nKMRyR0cL%2BXMqMMd%2BTww%3D%3D"
     
     today = date.today()
     base_date = today.strftime("%Y%m%d")
