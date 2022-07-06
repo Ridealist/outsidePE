@@ -18,8 +18,9 @@ logger = logging.getLogger(__name__)
 
 @api_view(["GET"])
 def WthrWrnList(request):
+    """기상 특보 목록 조회"""
     
-    news_url = "http://apis.data.go.kr/1360000/WthrWrnInfoService/getWthrPwn"
+    news_url = "http://apis.data.go.kr/1360000/WthrWrnInfoService/getWthrWrnList"
 
     today = datetime.now()
     date = today.strftime("%Y-%m-%d")
@@ -27,7 +28,7 @@ def WthrWrnList(request):
     payload = {
         "serviceKey": "g5Zc7ZwONtAhYmlXEjbbN5OnPGAHEx8u9vPSfJpV+7XGBUR81SrcuRXpegLTnbwzW4nKMRyR0cL+XMqMMd+Tww==",
         "dataType": "json",
-        "stnId": 108
+        "stnId": 109
         # "fromTmFc": date,
         # "toTmFc": date,
     }
@@ -39,6 +40,65 @@ def WthrWrnList(request):
     print(res.url)
     return Response(res.json())
 
+
+@api_view(["GET"])
+def WthrWrnMsg(request):
+    """기상 특보 통보문 조회"""
+    
+    news_url = "http://apis.data.go.kr/1360000/WthrWrnInfoService/getWthrWrnMsg"
+
+    today = datetime.now()
+    date = today.strftime("%Y-%m-%d")
+
+    payload = {
+        "serviceKey": "g5Zc7ZwONtAhYmlXEjbbN5OnPGAHEx8u9vPSfJpV+7XGBUR81SrcuRXpegLTnbwzW4nKMRyR0cL+XMqMMd+Tww==",
+        "dataType": "json",
+        "stnId": 109
+        # "fromTmFc": date,
+        # "toTmFc": date,
+    }
+    
+    # requests package use "encoder" for url in .get method
+    # By so, we should use DECODED serviceKey for authenticattion
+    # https://brownbears.tistory.com/501
+    res = requests.get(news_url, params=payload)
+    print(res.url)
+    return Response(res.json())
+
+
+@api_view(["GET"])
+def WthrInfo(request):
+    """기상 정보문 조회"""
+    info_list_url = "http://apis.data.go.kr/1360000/WthrWrnInfoService/getWthrInfoList"
+    payload = {
+        "serviceKey": "g5Zc7ZwONtAhYmlXEjbbN5OnPGAHEx8u9vPSfJpV+7XGBUR81SrcuRXpegLTnbwzW4nKMRyR0cL+XMqMMd+Tww==",
+        "dataType": "json",
+        "stnId": 109
+        # "fromTmFc": date,
+        # "toTmFc": date,
+    }
+
+    res_list = requests.get(info_list_url, params=payload)
+    print(res_list.url)
+    item_list = res_list.json().get("response").get("body").get("items").get("item")
+
+    wthr_news_url = "http://apis.data.go.kr/1360000/WthrWrnInfoService/getWthrInfo"
+    payload = {
+        "serviceKey": "g5Zc7ZwONtAhYmlXEjbbN5OnPGAHEx8u9vPSfJpV+7XGBUR81SrcuRXpegLTnbwzW4nKMRyR0cL+XMqMMd+Tww==",
+        "dataType": "json",
+        "stnId": 109
+        # "fromTmFc": date,
+        # "toTmFc": date,
+    }
+
+    res_news = requests.get(wthr_news_url, params=payload)
+    print(res_news.url)
+    news_list = res_news.json().get("response").get("body").get("items").get("item")
+
+    for i, item in enumerate(item_list):
+        item["Info"] = news_list[i]
+
+    return Response(item_list)
 
 @api_view(["GET"])
 def PwnCd(request):
